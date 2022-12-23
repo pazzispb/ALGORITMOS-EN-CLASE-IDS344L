@@ -1,6 +1,6 @@
 /*
 
-FactoresPrimos.cpp
+DescomponerFactores.cpp
 Materia - Estructuras de Datos y Algoritmos II
 
 Asunto: 
@@ -22,20 +22,16 @@ Fecha: 15 - Diciembre - 2022
 using namespace std;
 
 bool ValidarPrimo(int n){ //n es la posicion en la serie de numeros primos
-	int contador = 0;
-	for(int i = 2; i <= n-1; i++){
-		if( n%i == 0) contador++;
+	for(int i = 2; i <= sqrt(n); i++){
+		if( n%i == 0) return false;
 	}
-	return (contador == 0); //retorna true si es primo, false si no lo es
+	return true; //si llega aqui significa que es primo
 }
 
 int ObtenerPrimo(int divisor){
-	int primo = divisor;
-	do{
-		primo++;
-	}while(ValidarPrimo(primo) == false);
-	
-	return primo;
+	int primo = divisor + 1;
+	if(ValidarPrimo(primo) == false) return ObtenerPrimo(primo); //si no es primo vuelve a llamar a la funcion
+	else return primo; //si es primo retorna ese valor
 }
 
 string DescomponerFactores(int n, int divisor, string factores){
@@ -43,12 +39,12 @@ string DescomponerFactores(int n, int divisor, string factores){
 		return factores;	
 	}
 	else{
-		if( n%divisor == 0) {
+		if( n%divisor == 0) { //si es divisor
 			return DescomponerFactores( n/divisor, divisor, factores + "x" + to_string(divisor));	
 		}
 		else{
-			int primo = ObtenerPrimo(divisor);
-			return DescomponerFactores( n, primo, factores);
+			int primo = ObtenerPrimo(divisor); //si no es divisor busca el proximo primo para dividir
+			return DescomponerFactores( n, primo, factores); //vuelve a llamar la funcion
 		}
 	}
 }
@@ -58,6 +54,7 @@ int main(){
 	cout << "Ingrese el numero a verificar: ";
 	cin >> numero;
 	cout << DescomponerFactores(numero, 2, "1");
+	
 	return 0;
 }
 
