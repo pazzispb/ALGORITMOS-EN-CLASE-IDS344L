@@ -1,6 +1,6 @@
 /*
 
-DescomponerFactores.cpp
+FactoresPrimos.cpp
 Materia - Estructuras de Datos y Algoritmos II
 
 Asunto: 
