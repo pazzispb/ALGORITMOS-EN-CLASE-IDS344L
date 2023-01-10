@@ -21,6 +21,37 @@ Fecha: 15 - Diciembre - 2022
 
 using namespace std;
 
+bool ValidarEntrada(string entrada){ //true - es valida       false - no es valida 
+
+	for(int i = 0; i < entrada.length(); i++) //recorre todas las posiciones del string de entrada
+	{
+		if(isdigit(entrada[i]) == false){
+				cout << "La entrada debe ser numerica" << endl;
+				return false; //si no es una entrada numeerica return falso
+		}
+	}
+	return true;
+}
+
+string CapturarEntrada(string mensaje)  
+{
+	string entrada; //variable para almacenar la entrada
+	bool correcta; //variable para verificar si la entrada es valida
+	do{
+	//se repetira hasta que el usuario ingrese una entrada valida 
+		cout << mensaje;
+		cin >> entrada; //Tome la entrada por pantalla
+		correcta = ValidarEntrada(entrada); //Llama a la funcion para validar la entrada
+		if(correcta == false) //si no es valida
+		{
+			cout << "Entrada no valida." << endl;
+			system("pause");
+		}
+		cout << endl;
+	} while (correcta == false); //repetir mientras que la entrada no sea valida
+	return entrada; //retorna la entrada
+}
+
 bool ValidarPrimo(int n){ //n es la posicion en la serie de numeros primos
 	for(int i = 2; i <= sqrt(n); i++){
 		if( n%i == 0) return false;
@@ -51,8 +82,9 @@ string DescomponerFactores(int n, int divisor, string factores){
 
 int main(){
 	int numero = 0;
-	cout << "Ingrese el numero a descomponer: ";
-	cin >> numero;
+	
+	numero = stoi(CapturarEntrada("Ingrese el numero a descomponer: "));
+	
 	cout << DescomponerFactores(numero, 2, "1");
 	
 	return 0;
