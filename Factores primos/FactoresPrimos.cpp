@@ -85,7 +85,7 @@ int main(){
 	
 	numero = stoi(CapturarEntrada("Ingrese el numero a descomponer: "));
 	
-	cout << DescomponerFactores(numero, 2, "1");
+	cout << "La descomposicion es:" << DescomponerFactores(numero, 2, "1");
 	
 	return 0;
 }
