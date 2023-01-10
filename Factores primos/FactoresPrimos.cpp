@@ -51,7 +51,7 @@ string DescomponerFactores(int n, int divisor, string factores){
 
 int main(){
 	int numero = 0;
-	cout << "Ingrese el numero a verificar: ";
+	cout << "Ingrese el numero a descomponer: ";
 	cin >> numero;
 	cout << DescomponerFactores(numero, 2, "1");
 	
