@@ -21,12 +21,15 @@ Fecha: 15 - Diciembre - 2022
 using namespace std;
 
 
-int CalcularFibonacci(int anterior, int siguiente, int n){
-	if(n == 0){
-		return siguiente;	
+int VerificarFibonacci(int anterior, int siguiente, int numero){
+	if(numero == anterior){
+		return true;	
+	}
+	else if(numero < anterior){
+		return false;
 	}
 	else{
-		return CalcularFibonacci(siguiente, anterior + siguiente, n-1);	
+		return VerificarFibonacci(siguiente, anterior + siguiente, numero);	
 	}
 }
 
@@ -34,21 +37,10 @@ int main(){
 	int numero = 0;
 	cout << "Ingrese el numero a verificar: ";
 	cin >> numero;
-	bool pertenece = false;
 	
-	for(int i = 1; i <= 99; i++){
-		
-		int fibonacci = CalcularFibonacci(0, 1, i);
-		
-		if (fibonacci > numero) break;
-		else if (fibonacci == numero) {
-			pertenece = true;	
-		}
-	}
-	if(numero == 0) pertenece = true; 
 	
+	bool pertenece = VerificarFibonacci(0,1,numero);
+		
 	cout << (pertenece ? "El numero pertenece" : "El numero no pertenece");
 	return 0;
 }
-
-
